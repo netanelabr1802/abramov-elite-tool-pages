@@ -1,64 +1,58 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abramov Elite Tool - IT Management Solution</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #0d0d3b 100%); color: #e0e0e0; min-height: 100vh; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .header { text-align: center; padding: 60px 0 40px; }
-        .header h1 { font-size: 2.8em; color: #c9a84c; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(201, 168, 76, 0.3); }
-        .header .subtitle { font-size: 1.2em; color: #8a8aaf; margin-top: 10px; }
-        .badge { display: inline-block; background: linear-gradient(135deg, #c9a84c, #a08030); color: #0a0a2e; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85em; margin-top: 15px; }
-        .section { background: rgba(255,255,255,0.04); border: 1px solid rgba(201, 168, 76, 0.15); border-radius: 16px; padding: 35px; margin: 30px 0; }
-        .section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 20px; border-bottom: 1px solid rgba(201, 168, 76, 0.2); padding-bottom: 10px; }
-        .section p { line-height: 1.8; color: #b0b0c8; font-size: 1.05em; }
-        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .feature-card { background: rgba(201, 168, 76, 0.05); border: 1px solid rgba(201, 168, 76, 0.1); border-radius: 12px; padding: 20px; }
-        .feature-card h3 { color: #c9a84c; font-size: 1.1em; margin-bottom: 8px; }
-        .feature-card p { font-size: 0.95em; color: #9090a8; }
-        .footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(201, 168, 76, 0.1); margin-top: 40px; }
-        .footer p { color: #6a6a8a; font-size: 0.9em; }
-        .footer a { color: #c9a84c; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-        @media (max-width: 600px) { .features { grid-template-columns: 1fr; } .header h1 { font-size: 2em; } }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; form-action 'none';">
+<title>Abramov Elite Tool — כלי ניהול מערכת מקצועי</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0B0F19;color:#E5E7EB;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
+.card{max-width:700px;width:100%;background:#111827;border:2px solid rgba(201,168,76,.4);border-radius:24px;padding:48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+h1{color:#C9A84C;font-size:36px;margin-bottom:12px}
+.version{color:#8B7D3C;font-size:14px;margin-bottom:32px}
+.desc{color:#9CA3AF;font-size:16px;line-height:1.8;margin-bottom:32px}
+.features{text-align:right;margin:24px 0;padding:0 20px}
+.features li{color:#D1D5DB;font-size:14px;line-height:2.2;list-style:none}
+.features li::before{content:"✅ ";margin-left:8px}
+.links{margin-top:28px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.links a{color:#C9A84C;font-size:13px;text-decoration:underline}
+.footer{margin-top:40px;color:#4B5563;font-size:12px}
+.badge{display:inline-block;background:rgba(201,168,76,.15);color:#C9A84C;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Abramov Elite Tool</h1>
-            <p class="subtitle">Professional IT Management &amp; Diagnostics Solution</p>
-            <span class="badge">V40.0 GOLD Edition</span>
-        </div>
-        <div class="section">
-            <h2>About the Application</h2>
-            <p>Abramov Elite Tool is a comprehensive IT management platform designed for professionals and organizations. The tool provides advanced diagnostics for Microsoft 365 environments, network connectivity analysis, license management, and automated system maintenance capabilities. Built with security and efficiency in mind, it streamlines complex IT operations into a simple, intuitive interface.</p>
-        </div>
-        <div class="section">
-            <h2>Key Features</h2>
-            <div class="features">
-                <div class="feature-card"><h3>M365 Diagnostics</h3><p>Complete Microsoft 365 environment analysis with 5 diagnostic modules including connectivity, licensing, and activation checks.</p></div>
-                <div class="feature-card"><h3>Network Analysis</h3><p>TCP/443, ICMP, DNS, and Proxy connectivity testing for comprehensive network health monitoring.</p></div>
-                <div class="feature-card"><h3>Telegram Bot Integration</h3><p>Remote monitoring and control via a dedicated Telegram bot with inline keyboards and full Hebrew support.</p></div>
-                <div class="feature-card"><h3>Secure Authentication</h3><p>Google OAuth 2.0 integration via Supabase for secure user authentication and access management.</p></div>
-            </div>
-        </div>
-        <div class="section">
-            <h2>Authentication &amp; Data</h2>
-            <p>Abramov Elite Tool uses Google Sign-In (via Supabase) solely for user authentication purposes. The application requests only basic profile information: your email address and display name. No additional Google data is accessed, stored, or shared. Authentication is handled securely through industry-standard OAuth 2.0 protocols.</p>
-        </div>
-        <div class="footer">
-            <p>&#169; <span id="year"></span> Netanel Abramov. All rights reserved.</p>
-            <p style="margin-top: 10px;">
-                <a href="privacy.html">Privacy Policy</a> &#160;|&#160;
-                <a href="terms.html">Terms of Service</a> &#160;|&#160;
-                Contact: netanelabr1802@gmail.com
-            </p>
-        </div>
-    </div>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<div class="card">
+<div class="badge">V40.0.0 GOLD Edition</div>
+<h1>🛡️ Abramov Elite Tool</h1>
+<p class="version">כלי ניהול מערכת מקצועי לטכנאי IT ומנהלי מערכות</p>
+<p class="desc">
+תוכנת ניהול ודיאגנוסטיקת IT מתקדמת עבור טכנאי מחשבים ומנהלי מערכות.
+<br>מפותחת ב-C# WPF עם ממשק עברי מלא, סנכרון ענן וכלים מקצועיים.
+</p>
+<ul class="features">
+<li>דיאגנוסטיקה ותיקון מערכת מתקדם</li>
+<li>עזרה ראשונה ל-Microsoft 365 / Office 2024/2021/2019/2016</li>
+<li>ניהול משתמשים, הרשאות ו-Active Directory</li>
+<li>השתלטות מרחוק — TeamViewer, AnyDesk, MSTSC</li>
+<li>סנכרון ענן בזמן אמת עם Supabase</li>
+<li>פאנל ניהול מאובטח + בוט טלגרם</li>
+<li>התחברות עם Google (OAuth 2.0)</li>
+<li>הצפנת נתונים ברמת DPAPI</li>
+</ul>
+<div class="links">
+<a href="privacy.html">מדיניות פרטיות</a>
+<a href="terms.html">תנאי שימוש</a>
+<a href="mailto:netanelabr1802@gmail.com">יצירת קשר</a>
+</div>
+</div>
+<p class="footer">© <script>document.write(new Date().getFullYear())</script> Netanel Abramov — כל הזכויות שמורות | Abramov Elite Tool</p>
 </body>
 </html>
