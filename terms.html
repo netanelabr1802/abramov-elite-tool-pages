@@ -1,52 +1,316 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; form-action 'none';">
-<title>תנאי שימוש — Abramov Elite Tool</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0B0F19;color:#E5E7EB;min-height:100vh;padding:40px 20px}
-.container{max-width:700px;margin:0 auto;background:#111827;border:2px solid rgba(201,168,76,.3);border-radius:24px;padding:48px}
-h1{color:#C9A84C;font-size:28px;margin-bottom:24px;text-align:center}
-h2{color:#C9A84C;font-size:18px;margin:24px 0 12px}
-p{color:#9CA3AF;font-size:14px;line-height:1.8;margin-bottom:12px}
-a{color:#C9A84C}
-.footer{text-align:center;color:#4B5563;font-size:12px;margin-top:32px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="תנאי שימוש - Abramov Elite Tool">
+    <meta name="keywords" content="תנאים, שימוש, Abramov">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0B0F19">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-ancestors 'none'; form-action 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <title>תנאי שימוש - Abramov Elite Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0B0F19;
+            --secondary: #111827;
+            --accent: #C9A84C;
+            --text: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --border: #2D3748;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            padding: 32px 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex: 1 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 28px 0 16px;
+            color: var(--accent);
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .updated {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 16px 0 24px 24px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 16px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 12px;
+            }
+
+            .container {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 16px;
+                margin: 24px 0 14px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            ul, ol {
+                font-size: 13px;
+                margin: 14px 0 20px 20px;
+            }
+
+            li {
+                margin-bottom: 8px;
+            }
+
+            .updated {
+                font-size: 12px;
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 8px;
+            }
+
+            .container {
+                padding: 20px 14px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+
+            h2 {
+                font-size: 15px;
+                margin: 20px 0 12px;
+                padding-bottom: 6px;
+            }
+
+            p {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            ul, ol {
+                font-size: 13px;
+                margin: 12px 0 18px 18px;
+            }
+
+            li {
+                margin-bottom: 8px;
+                line-height: 1.6;
+            }
+
+            .updated {
+                font-size: 12px;
+                margin-bottom: 16px;
+                padding-bottom: 12px;
+            }
+
+            .back-link {
+                font-size: 12px;
+                padding: 8px 12px;
+                margin-bottom: 16px;
+            }
+
+            footer {
+                margin-top: 24px;
+                padding-top: 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>📋 תנאי שימוש — Abramov Elite Tool</h1>
-<p><strong>עדכון אחרון:</strong> מרץ <script>document.write(new Date().getFullYear())</script></p>
+    <div class="container">
+        <a href="index.html" class="back-link">← חזור לעמוד הבית</a>
 
-<h2>1. הסכמה</h2>
-<p>שימוש בתוכנה מהווה הסכמה לתנאים אלו.</p>
+        <h1>📋 תנאי שימוש</h1>
+        <h2 style="margin-top: 0; border: none;">Abramov Elite Tool</h2>
 
-<h2>2. רישיון</h2>
-<p>התוכנה מורשית לשימוש אישי ומקצועי בכפוף לאישור המפתח.
-העתקה, הנדסה לאחור או הפצה ללא אישור אסורה בתכלית.</p>
+        <p class="updated">
+            עדכון אחרון: מרץ 2026
+        </p>
 
-<h2>3. שימוש בלתי מורשה</h2>
-<p>כל ניסיון לעקוף את מנגנון האבטחה, לזייף זהות או להשתמש בתוכנה ללא אישור
-יביא לחסימה מיידית ועלול לגרור נקיטת צעדים משפטיים.</p>
+        <p>
+            קרא בעיון את תנאי השימוש הבאים. שימוש בשירות שלנו משמעותו הסכמה מלאה לתנאים אלה. אם אתה לא מסכים, אנא הימנע משימוש בשירות.
+        </p>
 
-<h2>4. אחריות</h2>
-<p>התוכנה מסופקת "כפי שהיא" (AS IS). המפתח אינו אחראי לנזקים ישירים או עקיפים
-הנובעים משימוש בתוכנה.</p>
+        <h2>1. הסכמה לתנאים</h2>
+        <p>
+            בהשתמשך ב-Abramov Elite Tool, אתה מודה בהסכמתך לתנאי השימוש הללו. תנאים אלה חלים על כל המשתמשים, ללא הבדל. אם אתה משתמש בשירות בשם ארגון או חברה, אתה מצהיר שיש לך סמכות לכך.
+        </p>
 
-<h2>5. יצירת קשר</h2>
-<p>📧 <a href="mailto:netanelabr1802@gmail.com">netanelabr1802@gmail.com</a></p>
-<p>© <script>document.write(new Date().getFullYear())</script> Netanel Abramov — כל הזכויות שמורות</p>
-</div>
-<p class="footer"><a href="index.html" style="color:#C9A84C">← חזרה לדף הראשי</a></p>
+        <h2>2. רישיון שימוש</h2>
+        <p>
+            אנו מעניקים לך רישיון מוגבל, לא בלעדי, שאינו ניתן להעברה, לשימוש בשירותנו בצורה אישית. אתה מסכים:
+        </p>
+        <ul>
+            <li>לא להעתיק או להפיץ את קוד או תוכן השירות</li>
+            <li>לא לנסות לפרוץ או להשקע את מערכותינו</li>
+            <li>לא לעשות שימוש בשירות למטרות מסחריות ללא אישור כתוב</li>
+            <li>לשמור על כל הסימני מסחר וקניין הנכללים בשירות</li>
+        </ul>
+
+        <h2>3. שימוש בלתי מורשה</h2>
+        <p>
+            אתה מסכים שלא תשתמש בשירות:
+        </p>
+        <ul>
+            <li>להתחזות או לטעון כי אתה מישהו שאתה לא</li>
+            <li>לשלוח דואר זבל, מלוות או תוכן מפיץ נזק</li>
+            <li>להשתמש בכלים אוטולטיים לגרף או להוריד נתונים</li>
+            <li>לגרום לנזק או הפרעה לשרתים או רשתות</li>
+            <li>לפרוץ, להעתיק או להעריר תכנים מוגנים</li>
+            <li>להציק, להעליב או להודות איומים לאחרים</li>
+        </ul>
+
+        <h2>4. אחריות וכתב התנצלות</h2>
+        <p>
+            השירות שלנו מסופק "כפי שהוא" ללא כל ערבויות. אנו לא אחראים:
+        </p>
+        <ul>
+            <li>לנזק ישיר או עקיף הנובע משימוש או אי-שימוש בשירות</li>
+            <li>לאובדן נתונים, כסף או הכנסה</li>
+            <li>לזמינות או ביצועים של השירות</li>
+            <li>לשגיאות או שמצא בתוכן</li>
+        </ul>
+        <p>
+            במקרים מסוימים, חוק מסוים עשוי שלא להתיר הגבלה של אחריות, אך אנו מתאמצים להגביל אחריות ככל האפשר.
+        </p>
+
+        <h2>5. יצירת קשר וסיום</h2>
+        <p>
+            אם יש לך שאלות בנוגע לתנאים אלה, או אתה רוצה לדווח על הפרה, אנא <a href="contact.html">צור קשר</a> אתנו או שלח דוא"ל ל<a href="mailto:contact@example.com">contact@example.com</a>.
+        </p>
+        <p>
+            אנו שומרים לעצמנו את הזכות לסיים או להשעות את גישתך בכל עת אם תהיה הפרה של תנאים אלה.
+        </p>
+
+        <footer>
+            <p>&copy; <script>document.write(Math.max(new Date().getFullYear(), 2025))</script> Netanel Abramov | כל הזכויות שמורות</p>
+        </footer>
+    </div>
 </body>
 </html>
