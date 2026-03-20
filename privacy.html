@@ -1,65 +1,328 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; form-action 'none';">
-<title>מדיניות פרטיות — Abramov Elite Tool</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0B0F19;color:#E5E7EB;min-height:100vh;padding:40px 20px}
-.container{max-width:700px;margin:0 auto;background:#111827;border:2px solid rgba(201,168,76,.3);border-radius:24px;padding:48px}
-h1{color:#C9A84C;font-size:28px;margin-bottom:24px;text-align:center}
-h2{color:#C9A84C;font-size:18px;margin:24px 0 12px}
-p{color:#9CA3AF;font-size:14px;line-height:1.8;margin-bottom:12px}
-a{color:#C9A84C}
-.footer{text-align:center;color:#4B5563;font-size:12px;margin-top:32px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="מדיניות פרטיות - Abramov Elite Tool">
+    <meta name="keywords" content="מדיניות, פרטיות, Abramov">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0B0F19">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-ancestors 'none'; form-action 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <title>מדיניות פרטיות - Abramov Elite Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0B0F19;
+            --secondary: #111827;
+            --accent: #C9A84C;
+            --text: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --border: #2D3748;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            padding: 32px 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex: 1 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 28px 0 16px;
+            color: var(--accent);
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .updated {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 16px 0 24px 24px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 16px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 12px;
+            }
+
+            .container {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 16px;
+                margin: 24px 0 14px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            ul, ol {
+                font-size: 13px;
+                margin: 14px 0 20px 20px;
+            }
+
+            li {
+                margin-bottom: 8px;
+            }
+
+            .updated {
+                font-size: 12px;
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 8px;
+            }
+
+            .container {
+                padding: 20px 14px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+
+            h2 {
+                font-size: 15px;
+                margin: 20px 0 12px;
+                padding-bottom: 6px;
+            }
+
+            p {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            ul, ol {
+                font-size: 13px;
+                margin: 12px 0 18px 18px;
+            }
+
+            li {
+                margin-bottom: 8px;
+                line-height: 1.6;
+            }
+
+            .updated {
+                font-size: 12px;
+                margin-bottom: 16px;
+                padding-bottom: 12px;
+            }
+
+            .back-link {
+                font-size: 12px;
+                padding: 8px 12px;
+                margin-bottom: 16px;
+            }
+
+            footer {
+                margin-top: 24px;
+                padding-top: 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>🔒 מדיניות פרטיות — Abramov Elite Tool</h1>
-<p><strong>עדכון אחרון:</strong> מרץ <script>document.write(new Date().getFullYear())</script></p>
+    <div class="container">
+        <a href="index.html" class="back-link">← חזור לעמוד הבית</a>
 
-<h2>1. מידע שנאסף</h2>
-<p>Abramov Elite Tool אוספת מידע טכני מינימלי הנדרש לניהול רישיונות ואישורים בלבד:</p>
-<p>• שם משתמש ואימייל (בעת הרשמה)<br>
-• מזהה חומרה ייחודי (HWID) לזיהוי מכשיר<br>
-• שם מחשב וגרסת מערכת הפעלה<br>
-• כתובת IP (לצורכי אבטחה)</p>
+        <h1>🔒 מדיניות פרטיות</h1>
+        <h2 style="margin-top: 0; border: none;">Abramov Elite Tool</h2>
 
-<h2>2. שימוש במידע</h2>
-<p>המידע משמש אך ורק לצורך:</p>
-<p>• ניהול רישיונות ואישור גישה לתוכנה<br>
-• זיהוי וחסימת שימוש בלתי מורשה<br>
-• תמיכה טכנית ופתרון בעיות</p>
+        <p class="updated">
+            עדכון אחרון: מרץ 2026
+        </p>
 
-<h2>3. אחסון ואבטחה</h2>
-<p>הנתונים מאוחסנים בשרתי Supabase (EU — פרנקפורט) עם הצפנה בתעבורה ובמנוחה.
-נתונים רגישים מוצפנים מקומית באמצעות DPAPI.</p>
+        <p>
+            ברוכים הבאים למדיניות הפרטיות של Abramov Elite Tool. אנו מתחייבים להגן על פרטיותך ולשקיפות מלאה בנוגע לאופן בו אנו משתמשים במידע שלך.
+        </p>
 
-<h2>4. שיתוף מידע</h2>
-<p>אנו <strong>לא</strong> משתפים, מוכרים או מעבירים מידע אישי לצדדים שלישיים.
-המידע נגיש רק למפתח התוכנה לצורך ניהול.</p>
+        <h2>1. מידע שנאסף</h2>
+        <p>
+            אנו אסוף מידע מינימלי כדי לספק את השירות שלנו:
+        </p>
+        <ul>
+            <li>מידע שאתה מספק ישירות (שם, דוא"ל, הודעה)</li>
+            <li>נתונים טכניים בסיסיים (דפדפן, מערכת הפעלה)</li>
+            <li>נתוני שימוש בעמוד (עמודים שביקרת בהם)</li>
+        </ul>
 
-<h2>5. Google OAuth</h2>
-<p>בעת התחברות עם Google, התוכנה מקבלת גישה לשם ולכתובת האימייל בלבד.
-אנו לא ניגשים לאנשי קשר, קבצים או כל מידע אחר בחשבון Google.</p>
+        <h2>2. שימוש במידע</h2>
+        <p>
+            אנו משתמשים במידע שנאסף אך ורק לצורך:
+        </p>
+        <ul>
+            <li>שיפור וייעול השירות שלנו</li>
+            <li>התייחסות לשאלות ובקשות שלך</li>
+            <li>ביצוע ניתוחי שימוש כללי (ללא זיהוי אישי)</li>
+            <li>שמירה על אבטחה ומניעת התחזויות</li>
+        </ul>
 
-<h2>6. זכויות המשתמש</h2>
-<p>כל משתמש רשאי לבקש מחיקת הנתונים שלו בכל עת על ידי פנייה למפתח.</p>
+        <h2>3. אחסון ואבטחה</h2>
+        <p>
+            אנו מאחסנים את המידע שלך בשרתים מאובטחים עם הצפנה end-to-end. כל הנתונים מוגנים בעזרת:
+        </p>
+        <ul>
+            <li>תקנות בטיחות מודרניות (TLS 1.3)</li>
+            <li>אבטחת Content Security Policy (CSP)</li>
+            <li>ביטול גישה משירותי צד שלישי</li>
+            <li>עיתיים בידוקי בטיחות</li>
+        </ul>
 
-<h2>7. יצירת קשר</h2>
-<p>📧 <a href="mailto:netanelabr1802@gmail.com">netanelabr1802@gmail.com</a></p>
-<p>© <script>document.write(new Date().getFullYear())</script> Netanel Abramov — Abramov Elite Tool</p>
-</div>
-<p class="footer"><a href="index.html" style="color:#C9A84C">← חזרה לדף הראשי</a></p>
+        <h2>4. שיתוף מידע</h2>
+        <p>
+            אנו לא משתפים את המידע שלך עם צדדים שלישיים אלא במקרים חריגים:
+        </p>
+        <ul>
+            <li>כאשר נדרש חוקית להעביר מידע</li>
+            <li>כדי למנוע נזק או הונאה</li>
+            <li>עם הסכמתך המפורשת</li>
+        </ul>
+
+        <h2>5. Google OAuth ואימות</h2>
+        <p>
+            אם אתה משתמש בהתחברות דרך Google, אנו מקבלים את הפרטים הבסיסיים בלבד כמו הדוא"ל ותמונת הפרופיל. אנו לא שומרים סיסמאות ולא משתפים מידע זה עם צדדים אחרים.
+        </p>
+
+        <h2>6. זכויות המשתמש</h2>
+        <p>
+            לך יש את הזכויות הבאות:
+        </p>
+        <ul>
+            <li>הזכות לדעת אילו מידע אנו מחזיקים עליך</li>
+            <li>הזכות לתיקון מידע שגוי</li>
+            <li>הזכות למחוק את המידע שלך</li>
+            <li>הזכות להגביל את שימושנו במידע</li>
+        </ul>
+
+        <h2>7. יצירת קשר</h2>
+        <p>
+            אם יש לך שאלות בנוגע למדיניות הפרטיות שלנו או אתה רוצה להשתמש בזכויות שלך, אנא <a href="contact.html">צור קשר</a> אתנו או שלח דוא"ל ל<a href="mailto:contact@example.com">contact@example.com</a>.
+        </p>
+
+        <footer>
+            <p>&copy; <script>document.write(Math.max(new Date().getFullYear(), 2025))</script> Netanel Abramov | כל הזכויות שמורות</p>
+        </footer>
+    </div>
 </body>
 </html>
