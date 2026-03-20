@@ -1,78 +1,367 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; form-action 'none';">
-<title>יצירת קשר — Abramov Elite Tool</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0B0F19;color:#E5E7EB;min-height:100vh;padding:40px 20px}
-.container{max-width:700px;margin:0 auto;background:#111827;border:2px solid rgba(201,168,76,.3);border-radius:24px;padding:48px}
-h1{color:#C9A84C;font-size:28px;margin-bottom:24px;text-align:center}
-h2{color:#C9A84C;font-size:18px;margin:24px 0 12px}
-p{color:#9CA3AF;font-size:14px;line-height:1.8;margin-bottom:12px}
-.contact-card{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:16px;padding:28px;margin:20px 0}
-.contact-item{display:flex;align-items:center;gap:12px;margin:16px 0;color:#D1D5DB;font-size:15px}
-.contact-item .icon{font-size:20px;min-width:28px;text-align:center}
-.contact-item .label{color:#8B7D3C;font-size:12px;display:block;margin-bottom:2px}
-.contact-item .value{color:#E5E7EB;font-weight:500}
-.note{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:16px;margin-top:24px;font-size:13px;color:#F87171;text-align:center}
-.footer{text-align:center;color:#4B5563;font-size:12px;margin-top:32px}
-a{color:#C9A84C}
-.divider{border:none;border-top:1px solid rgba(201,168,76,.15);margin:20px 0}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="יצירת קשר - Abramov Elite Tool">
+    <meta name="keywords" content="קשר, תיקיה, Abramov">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0B0F19">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-ancestors 'none'; form-action 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <title>יצירת קשר - Abramov Elite Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0B0F19;
+            --secondary: #111827;
+            --accent: #C9A84C;
+            --text: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --border: #2D3748;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            padding: 32px 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex: 1 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 28px 0 16px;
+            color: var(--accent);
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(201, 168, 76, 0.2);
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .contact-card {
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.1);
+        }
+
+        .contact-item {
+            margin-bottom: 16px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            color: var(--text);
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+
+        .contact-value.email {
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 16px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--accent);
+        }
+
+        .notice {
+            background: rgba(201, 168, 76, 0.06);
+            border-left: 3px solid var(--accent);
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #E8B76B;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 12px;
+            }
+
+            .container {
+                padding: 28px 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 26px;
+                margin-bottom: 16px;
+            }
+
+            h2 {
+                font-size: 16px;
+                margin: 24px 0 14px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            .contact-card {
+                padding: 20px;
+                margin-bottom: 16px;
+            }
+
+            .contact-item {
+                margin-bottom: 14px;
+            }
+
+            .contact-label {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .contact-value {
+                font-size: 14px;
+            }
+
+            .notice {
+                padding: 14px;
+                font-size: 12px;
+                margin-bottom: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 8px;
+            }
+
+            .container {
+                padding: 20px 14px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            h2 {
+                font-size: 15px;
+                margin: 20px 0 12px;
+                padding-bottom: 6px;
+            }
+
+            p {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+
+            .contact-card {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .contact-item {
+                margin-bottom: 12px;
+            }
+
+            .contact-label {
+                font-size: 11px;
+                margin-bottom: 4px;
+            }
+
+            .contact-value {
+                font-size: 13px;
+            }
+
+            .icon {
+                margin-right: 6px;
+            }
+
+            .notice {
+                padding: 12px;
+                font-size: 12px;
+                margin-bottom: 14px;
+            }
+
+            .back-link {
+                font-size: 12px;
+                padding: 8px 12px;
+                margin-bottom: 16px;
+            }
+
+            footer {
+                margin-top: 24px;
+                padding-top: 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>📬 יצירת קשר — Abramov Elite Tool</h1>
-<p style="text-align:center;color:#9CA3AF;margin-bottom:24px">לשאלות, בקשות ותמיכה טכנית — ניתן ליצור קשר באמצעות הפרטים הבאים:</p>
+    <div class="container">
+        <a href="index.html" class="back-link">← חזור לעמוד הבית</a>
 
-<div class="contact-card">
-<div class="contact-item">
-<span class="icon">👤</span>
-<div>
-<span class="label">מפתח</span>
-<span class="value">Netanel Abramov</span>
-</div>
-</div>
-<hr class="divider">
-<div class="contact-item">
-<span class="icon">📧</span>
-<div>
-<span class="label">אימייל</span>
-<span class="value">netanelabr1802@gmail.com</span>
-</div>
-</div>
-<hr class="divider">
-<div class="contact-item">
-<span class="icon">🛡️</span>
-<div>
-<span class="label">תוכנה</span>
-<span class="value">Abramov Elite Tool — V40.0.0 GOLD Edition</span>
-</div>
-</div>
-<hr class="divider">
-<div class="contact-item">
-<span class="icon">🌐</span>
-<div>
-<span class="label">אתר</span>
-<span class="value">netanelabr1802.github.io</span>
-</div>
-</div>
-</div>
+        <h1>📞 יצירת קשר</h1>
 
-<div class="note">⚠️ דף זה לצפייה בלבד — אין לשלוח הודעות מדף זה. נא לשלוח אימייל ישירות מתוכנת האימייל שלך.</div>
+        <p>
+            אנו כאן כדי לעזור לך! אם יש לך שאלות, הערות או בעיות בנוגע ל-Abramov Elite Tool, אנא השתמש בפרטים המוצגים להלן כדי להתחיל שיחה.
+        </p>
 
-<p style="text-align:center;margin-top:24px">© <script>document.write(new Date().getFullYear())</script> Netanel Abramov — כל הזכויות שמורות | Abramov Elite Tool</p>
-</div>
-<p class="footer"><a href="index.html" style="color:#C9A84C">← חזרה לדף הראשי</a></p>
+        <div class="notice">
+            ⚠️ לשמירה על אבטיחות, אנא העתק את כתובת הדוג"ל ידנית לתוך תוכנת הדוא"ל שלך במקום ללחוץ על קישור. אנו לא מקבלים טפסי יצירת קשר מקוונים.
+        </div>
+
+        <h2>פרטי התקשרות</h2>
+
+        <div class="contact-card">
+            <div class="contact-item">
+                <span class="contact-label"><span class="icon">👤</span>שם מ֤תח</span>
+                <div class="contact-value">Netanel Abramov</div>
+            </div>
+
+            <div class="contact-item">
+                <span class="contact-label"><span class="icon">📧</span>דוא"ל</span>
+                <div class="contact-value email" dir="ltr">contact@example.com</div>
+            </div>
+
+            <div class="contact-item">
+                <span class="contact-label"><span class="icon">💬</span>טלגרם</span>
+                <div class="contact-value">@NetanelAbramov</div>
+            </div>
+        </div>
+
+        <h2>שעות תגובה</h2>
+        <p>
+            אנו משתדלים להשיב לכל בקשות תוך 24-48 שעות עסקיות.
+            אנא שים לב שאנו עומדים בשעון אזור זמן קומץ הקטן, ותגובות מהן יכולות להיות מדורגות בהתאם.
+        </p>
+
+        <h2>סוגי בקשות שאנו מקבלים</h2>
+        <ul style="margin: 16px 0 24px 24px; font-size: 14px; color: var(--text);">
+            <li style="margin-bottom: 10px; line-height: 1.7;">שאלות טכניות והצעות לשיפור</li>
+            <li style="margin-bottom: 10px; line-height: 1.7;">דיווחי טעויות ודיווחי בטיחות</li>
+            <li style="margin-bottom: 10px; line-height: 1.7;">בקשות הסרת נתונים ופרטיות</li>
+            <li style="margin-bottom: 10px; line-height: 1.7;">שותפויות ושיתופי פעולה</li>
+            <li style="line-height: 1.7;">כל שאלה או הערה אחרת</li>
+        </ul>
+
+        <h2>אבטחה ופרטיות</h2>
+        <p>
+            בטיחות המידע שלך חשובה לנו. כל ההודעות מטופלות בחסויות מלאה ובקפדנות לפי <a href="privacy.html">מדיניות הפרטיות</a> שלנו. אנו לא משתפים מידע אישי עם צדדים שלישיים.
+        </p>
+
+        <footer>
+            <p>&copy; <script>document.write(Math.max(new Date().getFullYear(), 2025))</script> Netanel Abramov | כל הזכויות שמורות</p>
+        </footer>
+    </div>
 </body>
 </html>
