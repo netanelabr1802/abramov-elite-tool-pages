@@ -1,20 +1,8 @@
-# Abramov Elite Tool - Private Pages
-# Block all search engine crawling and indexing
+# Abramov Elite Tool - Website
+# Allow search engines to index public pages
 
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /admin.html
 
-# Block specific bots
-User-agent: Googlebot
-Disallow: /
-
-User-agent: Bingbot
-Disallow: /
-
-User-agent: Yandex
-Disallow: /
-
-User-agent: Baiduspider
-Disallow: /
-
-# No sitemap - private site
+Sitemap: https://netanelabr1802.github.io/abramov-elite-tool-pages/sitemap.xml
