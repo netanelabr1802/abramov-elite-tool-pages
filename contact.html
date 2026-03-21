@@ -217,12 +217,12 @@
         <h1>&#x1F4DE; יצירת קשר</h1>
 
         <p>
-            אנו כאן כדי לסייע! לשאלות, הערות או בעיות בנוגע ל-Abramov Elite Tool,
+            אנו כאן כדי לסייע שלנו. לשאלות, הערות או בעיות בנוגע ל-Abramov Elite Tool,
             ניתן להשתמש בפרטים המוצגים להלן כדי ליצור קשר.
         </p>
 
         <div class="notice">
-            &#x26A0;&#xFE0F; לשמירה על אבטחה, יש להעתיק את כתובת הדוא"ל ידנית לתוך תוכנת הדוא"ל במקום ללחוץ על קישור. אנו לא מקבלים טפסי יצירת קשר מקוונים.
+            &#x26A0;&#xFE0F; לשמירה על אבטחה, יש להעתיק את כתובת הדוא"ל ידנית לתוך תוכנת הדוב"ל במקום ללחוץ על קישור. אנו לא מקבלים טפסי יצירת קשר מקוונים.
         </div>
 
         <h2>פרטי התקשרות</h2>
@@ -251,7 +251,7 @@
             <li style="margin-bottom: 10px; line-height: 1.7;">דיווחי טעויות ודיווחי אבטחה</li>
             <li style="margin-bottom: 10px; line-height: 1.7;">בקשות הסרת נתונים ופרטיות</li>
             <li style="margin-bottom: 10px; line-height: 1.7;">שותפויות ושיתופי פעולה</li>
-            <li style="line-height: 1.7;">כל שאלה או הערה אחרת</li>
+            <li style="line-height: 1.7;">כל שאלה או הערה מאחרת</li>
         </ul>
 
         <h2>אבטחה ופרטיות</h2>
@@ -260,16 +260,9 @@
             <a href="privacy.html">מדיניות הפרטיות</a> שלנו. אנו לא משתפים מידע אישי עם צדדים שלישיים.
         </p>
 
-        <!-- ADMIN PANEL: visible only with ?admin=true in URL -->
-        <div class="admin-note" id="admin-panel">
-            <strong>&#x1F527; הגדרות מנהל:</strong><br>
-            לשינוי כתובת הדוא"ל המוצגת באתר, יש לערוך את הקובץ
-            <code>site-config.js</code> בריפוזיטורי ולעדכן את השדה
-            <code>contactEmail</code>. השינוי ייכנס לתוקף בכל הדפים באופן אוטומטי.
-        </div>
-
         <footer>
             <p>&copy; <script>document.write(Math.max(new Date().getFullYear(), 2025))</script> Netanel Abramov | כל הזכויות שמורות</p>
+            <p style="margin-top: 8px;"><a href="admin.html" style="font-size: 11px; color: var(--text-muted); opacity: 0.4; transition: opacity 0.3s;">&#x1F512;</a></p>
         </footer>
     </div>
 
@@ -280,10 +273,6 @@
                 var nameEl = document.getElementById('dev-name');
                 if (emailEl) emailEl.textContent = SITE_CONFIG.contactEmail;
                 if (nameEl) nameEl.textContent = SITE_CONFIG.developerName;
-            }
-            if (new URLSearchParams(window.location.search).get('admin') === 'true') {
-                var panel = document.getElementById('admin-panel');
-                if (panel) panel.style.display = 'block';
             }
         })();
     </script>
