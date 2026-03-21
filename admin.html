@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="פאנל ניהול - Abramov Elite Tool">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0B0F19">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-ancestors 'none'; form-action 'none';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <title>פאנל ניהול - Abramov Elite Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0B0F19;
+            --secondary: #111827;
+            --accent: #C9A84C;
+            --text: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --border: #2D3748;
+            --danger: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--secondary);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input[type="password"], input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            font-family: inherit;
+            direction: ltr;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+        }
+        input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--accent), #E8B76B);
+            color: var(--primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(201, 168, 76, 0.3);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #F87171);
+            color: white;
+            margin-top: 12px;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #34D399);
+            color: white;
+        }
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #FCA5A5;
+        }
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #FCD34D;
+        }
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6EE7B7;
+        }
+        .alert-info {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #93C5FD;
+        }
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: var(--success);
+        }
+        .lockout-timer {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--danger);
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+        }
+        .attempt-counter {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+        .log-entry {
+            padding: 10px 14px;
+            background: rgba(201, 168, 76, 0.04);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border: 1px solid rgba(201, 168, 76, 0.08);
+            direction: ltr;
+            text-align: left;
+        }
+        .log-entry .time {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .log-entry.suspicious {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.15);
+        }
+        .log-entry.suspicious .time {
+            color: var(--danger);
+        }
+        #login-section, #admin-panel, #lockout-section {
+            display: none;
+        }
+        #login-section.active, #admin-panel.active, #lockout-section.active {
+            display: block;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .admin-header h2 {
+            font-size: 18px;
+            color: var(--accent);
+            margin: 0;
+        }
+        .session-info {
+            font-size: 11px;
+            color: var(--text-muted);
+            direction: ltr;
+        }
+        .config-display {
+            background: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        }
+        .config-item:last-child {
+            border-bottom: none;
+        }
+        .config-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .config-value {
+            font-size: 13px;
+            color: var(--text);
+            direction: ltr;
+            font-family: 'Courier New', monospace;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 16px;
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            font-size: 13px;
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--accent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .phishing-warning {
+            animation: pulse 1.5s infinite;
+        }
+        @media (max-width: 768px) {
+            body { padding: 24px 12px; }
+            .container { padding: 28px 20px; border-radius: 16px; }
+            h1 { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 16px 8px; }
+            .container { padding: 20px 14px; border-radius: 12px; }
+            h1 { font-size: 22px; }
+            .btn { font-size: 14px; padding: 12px 20px; }
+            input { font-size: 14px; padding: 12px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <script src="site-config.js"></script>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; חזרה לעמוד הבית</a>
+
+        <!-- LOCKOUT SECTION -->
+        <div id="lockout-section">
+            <h1>&#x1F6D1; חסימה זמנית</h1>
+            <p class="subtitle">זוהו ניסיונות כניסה חשודים. המערכת נחסמה זמנית.</p>
+            <div class="alert alert-danger" style="display: block;">
+                <strong>&#x26A0;&#xFE0F; התראת אבטחה:</strong> בוצעו מספר ניסיונות כניסה כושלים. ייתכן שמדובר בניסיון פישינג או חדירה.
+            </div>
+            <div class="lockout-timer" id="lockout-timer">--:--</div>
+            <p style="text-align: center; font-size: 13px; color: var(--text-muted);">
+                המערכת תשוחרר אוטומטית בתום תקופת הנעילה.
+            </p>
+            <div id="lockout-log" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- LOGIN SECTION -->
+        <div id="login-section">
+            <h1>&#x1F512; כניסת מנהל</h1>
+            <p class="subtitle">Abramov Elite Tool — פאנל ניהול מאובטח</p>
+
+            <div class="security-badge">
+                <span>&#x1F6E1;&#xFE0F;</span>
+                <span>חיבור מאובטח | הצפנת SHA-256 | הגנה מפני Brute Force</span>
+            </div>
+
+            <div class="alert alert-danger" id="login-error"></div>
+            <div class="alert alert-warning" id="login-warning"></div>
+            <div class="alert alert-info" id="phishing-alert">
+                <strong>&#x1F6A8; זיהוי פישינג:</strong> זוהה ניסיון חשוד. פרטי הכניסה שלך מוגנים והם לא נשלחים לשום שרת חיצוני. כל האימות מתבצע מקומית במכשיר שלך.
+            </div>
+
+            <div class="form-group">
+                <label for="admin-password">&#x1F511; סיסמת מנהל</label>
+                <input type="password" id="admin-password" placeholder="הזן סיסמת מנהל..." autocomplete="off" spellcheck="false">
+            </div>
+
+            <button class="btn" id="login-btn" onclick="attemptLogin()">&#x1F510; כניסה מאובטחת</button>
+
+            <div class="attempt-counter" id="attempt-counter"></div>
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <div id="admin-panel">
+            <div class="admin-header">
+                <h2>&#x2699;&#xFE0F; פאנל ניהול</h2>
+                <div class="session-info" id="session-info"></div>
+            </div>
+
+            <div class="alert alert-success" id="save-success"></div>
+            <div class="alert alert-danger" id="save-error"></div>
+
+            <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 16px;">&#x1F4CB; הגדרות נוכחיות</h3>
+            <div class="config-display" id="current-config"></div>
+
+            <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 16px;">&#x270F;&#xFE0F; עדכון פרטי התקשרות</h3>
+
+            <div class="form-group">
+                <label for="new-email">&#x1F4E7; כתובת דוא"ל חדשה</label>
+                <input type="email" id="new-email" placeholder="example@gmail.com" autocomplete="off" dir="ltr">
+            </div>
+
+            <div class="form-group">
+                <label for="new-name">&#x1F464; שם מפתח</label>
+                <input type="text" id="new-name" placeholder="שם מלא" autocomplete="off">
+            </div>
+
+            <button class="btn btn-success" onclick="saveChanges()">&#x1F4BE; שמור שינויים</button>
+
+            <h3 style="font-size: 15px; color: var(--accent); margin: 24px 0 16px;">&#x1F511; שינוי סיסמת מנהל</h3>
+
+            <div class="form-group">
+                <label for="current-pass">סיסמה נוכחית</label>
+                <input type="password" id="current-pass" placeholder="הזן סיסמה נוכחית..." autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="new-pass">סיסמה חדשה (לפחות 8 תווים)</label>
+                <input type="password" id="new-pass" placeholder="הזן סיסמה חדשה..." autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="confirm-pass">אימות סיסמה חדשה</label>
+                <input type="password" id="confirm-pass" placeholder="הזן שוב את הסיסמה החדשה..." autocomplete="off">
+            </div>
+            <button class="btn" onclick="changePassword()">&#x1F510; עדכן סיסמה</button>
+
+            <h3 style="font-size: 15px; color: var(--accent); margin: 24px 0 16px;">&#x1F4DC; יומן אבטחה</h3>
+            <div id="security-log"></div>
+
+            <button class="btn btn-danger" onclick="logout()">&#x1F6AA; יציאה מהמערכת</button>
+        </div>
+
+        <footer>
+            <p>&copy; <script>document.write(Math.max(new Date().getFullYear(), 2025))</script> Netanel Abramov | כל הזכויות שמורות</p>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ==========================================
+        // SECURITY CONFIGURATION
+        // ==========================================
+        var SECURITY = {
+            MAX_ATTEMPTS: 5,
+            LOCKOUT_DURATION: 5 * 60 * 1000,   // 5 minutes
+            SESSION_TIMEOUT: 30 * 60 * 1000,     // 30 minutes
+            MIN_PASSWORD_LENGTH: 8,
+            STORAGE_PREFIX: 'aet_admin_'
+        };
+
+        // Default password hash (SHA-256 of "NetanelAdmin2026!")
+        var DEFAULT_HASH = 'caaa31cc75d47c03e9643c0d337bae29464caad742cf7c5e20ca0a7e05e8a6df';
+
+        // ==========================================
+        // SHA-256 HASHING (Web Crypto API)
+        // ==========================================
+        async function sha256(message) {
+            var msgBuffer = new TextEncoder().encode(message);
+            var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            var hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+        }
+
+        // ==========================================
+        // SECURE STORAGE (sessionStorage only - never localStorage)
+        // ==========================================
+        function secureGet(key) {
+            try {
+                return sessionStorage.getItem(SECURITY.STORAGE_PREFIX + key);
+            } catch(e) { return null; }
+        }
+
+        function secureSet(key, value) {
+            try {
+                sessionStorage.setItem(SECURITY.STORAGE_PREFIX + key, value);
+            } catch(e) {}
+        }
+
+        function secureClear() {
+            try {
+                var keys = [];
+                for (var i = 0; i < sessionStorage.length; i++) {
+                    var k = sessionStorage.key(i);
+                    if (k && k.indexOf(SECURITY.STORAGE_PREFIX) === 0) keys.push(k);
+                }
+                keys.forEach(function(k) { sessionStorage.removeItem(k); });
+            } catch(e) {}
+        }
+
+        // ==========================================
+        // PERSISTENT STORAGE (for password hash + security log)
+        // Uses localStorage ONLY for password hash and attempt tracking
+        // ==========================================
+        function persistGet(key) {
+            try {
+                return localStorage.getItem(SECURITY.STORAGE_PREFIX + key);
+            } catch(e) { return null; }
+        }
+
+        function persistSet(key, value) {
+            try {
+                localStorage.setItem(SECURITY.STORAGE_PREFIX + key, value);
+            } catch(e) {}
+        }
+
+        // ==========================================
+        // SECURITY LOG
+        // ==========================================
+        function addSecurityLog(type, message) {
+            var logs = [];
+            try { logs = JSON.parse(persistGet('security_log') || '[]'); } catch(e) {}
+            logs.unshift({
+                time: new Date().toISOString(),
+                type: type,
+                message: message,
+                ua: navigator.userAgent.substring(0, 80)
+            });
+            if (logs.length > 50) logs = logs.slice(0, 50);
+            persistSet('security_log', JSON.stringify(logs));
+        }
+
+        // ==========================================
+        // ANTI-PHISHING DETECTION
+        // ==========================================
+        function detectPhishing() {
+            var dominated = window.location.hostname;
+            var warnings = [];
+
+            // Check if running in iframe (clickjacking)
+            if (window !== window.top) {
+                warnings.push('זוהה שימוש ב-iframe — ייתכן ניסיון clickjacking');
+            }
+
+            // Check referrer for suspicious sources
+            if (document.referrer) {
+                var refHost = '';
+                try { refHost = new URL(document.referrer).hostname; } catch(e) {}
+                if (refHost && refHost !== dominated && refHost.indexOf('github') === -1) {
+                    warnings.push('הפניה מדומיין חשוד: ' + refHost);
+                }
+            }
+
+            // Check for suspicious URL parameters
+            var params = new URLSearchParams(window.location.search);
+            var susParams = ['token', 'redirect', 'callback', 'return', 'next', 'url'];
+            susParams.forEach(function(p) {
+                if (params.has(p)) {
+                    warnings.push('פרמטר חשוד ב-URL: ' + p);
+                }
+            });
+
+            // Check for data: or javascript: in URL
+            if (window.location.href.match(/data:|javascript:/i)) {
+                warnings.push('זוהה URL מסוכן');
+            }
+
+            return warnings;
+        }
+
+        // ==========================================
+        // BRUTE FORCE PROTECTION
+        // ==========================================
+        function getAttemptData() {
+            try {
+                return JSON.parse(persistGet('attempts') || '{"count":0,"lockUntil":0}');
+            } catch(e) {
+                return { count: 0, lockUntil: 0 };
+            }
+        }
+
+        function setAttemptData(data) {
+            persistSet('attempts', JSON.stringify(data));
+        }
+
+        function isLockedOut() {
+            var data = getAttemptData();
+            if (data.lockUntil && Date.now() < data.lockUntil) return true;
+            if (data.lockUntil && Date.now() >= data.lockUntil) {
+                setAttemptData({ count: 0, lockUntil: 0 });
+                return false;
+            }
+            return false;
+        }
+
+        function recordFailedAttempt() {
+            var data = getAttemptData();
+            data.count++;
+            if (data.count >= SECURITY.MAX_ATTEMPTS) {
+                data.lockUntil = Date.now() + SECURITY.LOCKOUT_DURATION;
+                addSecurityLog('lockout', 'Account locked after ' + data.count + ' failed attempts');
+            }
+            setAttemptData(data);
+            return data;
+        }
+
+        function resetAttempts() {
+            setAttemptData({ count: 0, lockUntil: 0 });
+        }
+
+        // ==========================================
+        // UI HELPERS
+        // ==========================================
+        function showSection(id) {
+            ['login-section', 'admin-panel', 'lockout-section'].forEach(function(s) {
+                var el = document.getElementById(s);
+                if (el) el.classList.remove('active');
+            });
+            var target = document.getElementById(id);
+            if (target) target.classList.add('active');
+        }
+
+        function showAlert(id, message, duration) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.innerHTML = message;
+            el.style.display = 'block';
+            if (duration) {
+                setTimeout(function() { el.style.display = 'none'; }, duration);
+            }
+        }
+
+        function hideAlert(id) {
+            var el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        }
+
+        // ==========================================
+        // LOCKOUT UI
+        // ==========================================
+        var lockoutInterval = null;
+
+        function showLockout() {
+            showSection('lockout-section');
+            var data = getAttemptData();
+
+            // Show security log entries
+            var logDiv = document.getElementById('lockout-log');
+            if (logDiv) {
+                var logs = [];
+                try { logs = JSON.parse(persistGet('security_log') || '[]'); } catch(e) {}
+                var recent = logs.slice(0, 5);
+                logDiv.innerHTML = '<h3 style="font-size:14px; color:var(--danger); margin-bottom:12px;">ניסיונות כניסה אחרונים:</h3>';
+                recent.forEach(function(log) {
+                    var d = new Date(log.time);
+                    var timeStr = d.toLocaleTimeString('he-IL');
+                    var cls = log.type === 'failed' || log.type === 'lockout' ? 'suspicious' : '';
+                    logDiv.innerHTML += '<div class="log-entry ' + cls + '"><span class="time">' + timeStr + '</span> — ' + log.message + '</div>';
+                });
+            }
+
+            // Start countdown
+            if (lockoutInterval) clearInterval(lockoutInterval);
+            lockoutInterval = setInterval(function() {
+                var d = getAttemptData();
+                var remaining = Math.max(0, d.lockUntil - Date.now());
+                if (remaining <= 0) {
+                    clearInterval(lockoutInterval);
+                    resetAttempts();
+                    init();
+                    return;
+                }
+                var mins = Math.floor(remaining / 60000);
+                var secs = Math.floor((remaining % 60000) / 1000);
+                var timerEl = document.getElementById('lockout-timer');
+                if (timerEl) timerEl.textContent = mins.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+        window.attemptLogin = async function() {
+            var passwordInput = document.getElementById('admin-password');
+            var loginBtn = document.getElementById('login-btn');
+            if (!passwordInput || !loginBtn) return;
+
+            var password = passwordInput.value.trim();
+            if (!password) {
+                showAlert('login-error', '&#x26A0;&#xFE0F; יש להזין סיסמה.', 3000);
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'מאמת...';
+
+            // Get stored hash or use default
+            var storedHash = persistGet('password_hash') || DEFAULT_HASH;
+
+            try {
+                var inputHash = await sha256(password);
+
+                if (inputHash === storedHash) {
+                    // SUCCESS
+                    resetAttempts();
+                    addSecurityLog('login', 'Successful admin login');
+
+                    // Set session
+                    secureSet('session_token', Date.now().toString());
+                    secureSet('session_start', Date.now().toString());
+
+                    passwordInput.value = '';
+                    showAdminPanel();
+                } else {
+                    // FAILED
+                    var attemptData = recordFailedAttempt();
+                    addSecurityLog('failed', 'Failed login attempt (' + attemptData.count + '/' + SECURITY.MAX_ATTEMPTS + ')');
+
+                    if (attemptData.count >= SECURITY.MAX_ATTEMPTS) {
+                        showLockout();
+                    } else {
+                        var remaining = SECURITY.MAX_ATTEMPTS - attemptData.count;
+                        showAlert('login-error', '&#x26A0;&#xFE0F; סיסמה שגויה. נותרו ' + remaining + ' ניסיונות לפני חסימה.', 5000);
+
+                        // Show phishing warning after 3 failed attempts
+                        if (attemptData.count >= 3) {
+                            document.getElementById('phishing-alert').style.display = 'block';
+                        }
+
+                        updateAttemptCounter(attemptData.count);
+                    }
+
+                    passwordInput.value = '';
+                }
+            } catch(e) {
+                showAlert('login-error', '&#x26A0;&#xFE0F; שגיאת אימות. נסה שוב.', 3000);
+            }
+
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '&#x1F510; כניסה מאובטחת';
+        };
+
+        function updateAttemptCounter(count) {
+            var el = document.getElementById('attempt-counter');
+            if (el && count > 0) {
+                el.textContent = 'ניסיונות כושלים: ' + count + '/' + SECURITY.MAX_ATTEMPTS;
+                el.style.color = count >= 3 ? 'var(--danger)' : 'var(--text-muted)';
+            }
+        }
+
+        // Handle Enter key on password input
+        document.addEventListener('DOMContentLoaded', function() {
+            var passInput = document.getElementById('admin-password');
+            if (passInput) {
+                passInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') window.attemptLogin();
+                });
+            }
+        });
+
+        // ==========================================
+        // ADMIN PANEL
+        // ==========================================
+        function showAdminPanel() {
+            showSection('admin-panel');
+
+            // Session info
+            var sessionStart = secureGet('session_start');
+            var sessionInfo = document.getElementById('session-info');
+            if (sessionInfo && sessionStart) {
+                var d = new Date(parseInt(sessionStart));
+                sessionInfo.textContent = 'Session: ' + d.toLocaleTimeString('he-IL');
+            }
+
+            // Show current config
+            var configDiv = document.getElementById('current-config');
+            if (configDiv && typeof SITE_CONFIG !== 'undefined') {
+                configDiv.innerHTML =
+                    '<div class="config-item"><span class="config-label">דוג"ל</span><span class="config-value">' + SITE_CONFIG.contactEmail + '</span></div>' +
+                    '<div class="config-item"><span class="config-label">שם מפתח</span><span class="config-value">' + SITE_CONFIG.developerName + '</span></div>' +
+                    '<div class="config-item"><span class="config-label">גרסה</span><span class="config-value">' + SITE_CONFIG.version + '</span></div>';
+            }
+
+            // Pre-fill current values
+            var emailInput = document.getElementById('new-email');
+            var nameInput = document.getElementById('new-name');
+            if (emailInput && typeof SITE_CONFIG !== 'undefined') emailInput.value = SITE_CONFIG.contactEmail;
+            if (nameInput && typeof SITE_CONFIG !== 'undefined') nameInput.value = SITE_CONFIG.developerName;
+
+            // Show security log
+            renderSecurityLog();
+
+            // Session timeout
+            startSessionTimer();
+        }
+
+        function renderSecurityLog() {
+            var logDiv = document.getElementById('security-log');
+            if (!logDiv) return;
+            var logs = [];
+            try { logs = JSON.parse(persistGet('security_log') || '[]'); } catch(e) {}
+            if (logs.length === 0) {
+                logDiv.innerHTML = '<p style="font-size:13px; color:var(--text-muted); text-align:center;">אין רשומות ביומן האבטחה.</p>';
+                return;
+            }
+            logDiv.innerHTML = '';
+            logs.slice(0, 15).forEach(function(log) {
+                var d = new Date(log.time);
+                var dateStr = d.toLocaleDateString('he-IL') + ' ' + d.toLocaleTimeString('he-IL');
+                var cls = (log.type === 'failed' || log.type === 'lockout') ? 'suspicious' : '';
+                logDiv.innerHTML += '<div class="log-entry ' + cls + '"><span class="time">' + dateStr + '</span> — ' + log.message + '</div>';
+            });
+        }
+
+        // ==========================================
+        // SAVE CHANGES
+        // ==========================================
+        window.saveChanges = function() {
+            if (!secureGet('session_token')) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; אין הרשאה. יש להתחבר מחדש.', 3000);
+                return;
+            }
+
+            var newEmail = document.getElementById('new-email').value.trim();
+            var newName = document.getElementById('new-name').value.trim();
+
+            if (!newEmail || !newName) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; יש למלא את כל השדות.', 3000);
+                return;
+            }
+
+            // Validate email
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(newEmail)) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; כתובת דוא"ל לא תקינה.', 3000);
+                return;
+            }
+
+            // Generate updated site-config.js content
+            var configContent = '// ============================================================\n';
+            configContent += '// ADMIN CONFIGURATION — Abramov Elite Tool\n';
+            configContent += '// ============================================================\n';
+            configContent += '// To change the contact email displayed across the entire site,\n';
+            configContent += '// edit ONLY the "contactEmail" value below and commit this file.\n';
+            configContent += '// All pages will automatically reflect the change.\n';
+            configContent += '// ============================================================\n';
+            configContent += 'const SITE_CONFIG = {\n';
+            configContent += '    contactEmail: "' + newEmail.replace(/"/g, '\\"') + '",\n';
+            configContent += '    developerName: "' + newName.replace(/"/g, '\\"') + '",\n';
+            configContent += '    toolName: "Abramov Elite Tool",\n';
+            configContent += '    version: "' + (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.version : '40.0.0') + '"\n';
+            configContent += '};\n';
+
+            // Show the config content for copying
+            addSecurityLog('config_change', 'Config updated: email=' + newEmail + ', name=' + newName);
+
+            showAlert('save-success',
+                '&#x2705; ההגדרות עודכנו בהצלחה!<br><br>' +
+                '<strong>כדי להחיל את השינויים באתע:</strong><br>' +
+                '1. לך ל-<a href="https://github.com/netanelabr1802/abramov-elite-tool-pages/edit/main/site-config.js" target="_blank" style="color:var(--accent);">site-config.js ב-GitHub</a><br>' +
+                '2. החלף את התוכן בקובץ בטקסט שהועתק<br>' +
+                '3. לחץ "Commit changes"<br><br>' +
+                '<button onclick="copyConfig()" style="padding:8px 16px;background:var(--accent);color:var(--primary);border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;">&#x1F4CB; העתק הגדרות</button>' +
+                '<textarea id="config-output" style="position:absolute;left:-9999px;">' + configContent.replace(/</g, '&lt;') + '</textarea>'
+            );
+
+            // Store for copy
+            window._configContent = configContent;
+        };
+
+        window.copyConfig = function() {
+            if (window._configContent) {
+                navigator.clipboard.writeText(window._configContent).then(function() {
+                    var btn = document.querySelector('#save-success button');
+                    if (btn) {
+                        btn.innerHTML = '&#x2705; הועתק!';
+                        btn.style.background = 'var(--success)';
+                        btn.style.color = 'white';
+                    }
+                }).catch(function() {
+                    // Fallback
+                    var ta = document.createElement('textarea');
+                    ta.value = window._configContent;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                });
+            }
+        };
+
+        // ==========================================
+        // CHANGE PASSWORD
+        // ==========================================
+        window.changePassword = async function() {
+            if (!secureGet('session_token')) return;
+
+            var currentPass = document.getElementById('current-pass').value;
+            var newPass = document.getElementById('new-pass').value;
+            var confirmPass = document.getElementById('confirm-pass').value;
+
+            if (!currentPass || !newPass || !confirmPass) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; יש למלא את כל שדות הסיסמה.', 3000);
+                return;
+            }
+
+            if (newPass.length < SECURITY.MIN_PASSWORD_LENGTH) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; הסיסמה חייבת להכיל לפחות ' + SECURITY.MIN_PASSWORD_LENGTH + ' תווים.', 3000);
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; הסיסמאות אינן תואמות.', 3000);
+                return;
+            }
+
+            var storedHash = persistGet('password_hash') || DEFAULT_HASH;
+            var currentHash = await sha256(currentPass);
+
+            if (currentHash !== storedHash) {
+                showAlert('save-error', '&#x26A0;&#xFE0F; הסיסמה הנוכחית שגויה.', 3000);
+                return;
+            }
+
+            var newHash = await sha256(newPass);
+            persistSet('password_hash', newHash);
+            addSecurityLog('password_change', 'Admin password changed successfully');
+
+            showAlert('save-success', '&#x2705; הסיסמה עודכנה בהצלחה!', 5000);
+
+            document.getElementById('current-pass').value = '';
+            document.getElementById('new-pass').value = '';
+            document.getElementById('confirm-pass').value = '';
+
+            renderSecurityLog();
+        };
+
+        // ==========================================
+        // LOGOUT
+        // ==========================================
+        window.logout = function() {
+            addSecurityLog('logout', 'Admin logged out');
+            secureClear();
+            init();
+        };
+
+        // ==========================================
+        // SESSION TIMEOUT
+        // ==========================================
+        var sessionTimer = null;
+
+        function startSessionTimer() {
+            if (sessionTimer) clearInterval(sessionTimer);
+            sessionTimer = setInterval(function() {
+                var sessionStart = secureGet('session_start');
+                if (!sessionStart) return;
+                var elapsed = Date.now() - parseInt(sessionStart);
+                if (elapsed > SECURITY.SESSION_TIMEOUT) {
+                    addSecurityLog('timeout', 'Session expired after 30 minutes');
+                    secureClear();
+                    init();
+                }
+            }, 30000);
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        function init() {
+            // Check for phishing indicators
+            var phishingWarnings = detectPhishing();
+            if (phishingWarnings.length > 0) {
+                phishingWarnings.forEach(function(w) {
+                    addSecurityLog('phishing', w);
+                });
+            }
+
+            // Check lockout
+            if (isLockedOut()) {
+                showLockout();
+                return;
+            }
+
+            // Check existing session
+            var token = secureGet('session_token');
+            var start = secureGet('session_start');
+            if (token && start) {
+                var elapsed = Date.now() - parseInt(start);
+                if (elapsed < SECURITY.SESSION_TIMEOUT) {
+                    showAdminPanel();
+                    return;
+                } else {
+                    secureClear();
+                }
+            }
+
+            // Show login
+            showSection('login-section');
+
+            // Show attempt counter if there are previous failures
+            var attempts = getAttemptData();
+            if (attempts.count > 0) {
+                updateAttemptCounter(attempts.count);
+            }
+
+            // Show phishing warnings
+            if (phishingWarnings.length > 0) {
+                document.getElementById('phishing-alert').style.display = 'block';
+            }
+        }
+
+        // Start
+        init();
+    })();
+    </script>
+</body>
+</html>
