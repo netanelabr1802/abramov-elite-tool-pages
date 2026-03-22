@@ -45,7 +45,7 @@
             min-height: 100vh;
         }
         .container {
-            max-width: 520px;
+            max-width: 720px;
             width: 100%;
             margin: 0 auto;
             padding: 48px;
@@ -1338,6 +1338,67 @@
     var _currentFP = null;
     getClientFingerprint().then(function(fp) { _currentFP = fp; });
 
-</script>
+
+    function saveChanges() {
+        var email = document.getElementById('new-email').value.trim();
+        var name = document.getElementById('new-name').value.trim();
+        var successEl = document.getElementById('save-success');
+        var errorEl = document.getElementById('save-error');
+        successEl.style.display = 'none';
+        errorEl.style.display = 'none';
+        if (!email && !name) { errorEl.textContent = '\u05D9\u05E9 \u05DC\u05DE\u05DC\u05D0 \u05DC\u05E4\u05D7\u05D5\u05EA \u05E9\u05D3\u05D4 \u05D0\u05D7\u05D3'; errorEl.style.display = 'block'; return; }
+        if (email) localStorage.setItem('aet_admin_email', email);
+        if (name) localStorage.setItem('aet_admin_name', name);
+        successEl.textContent = '\u05D4\u05E9\u05D9\u05E0\u05D5\u05D9\u05D9\u05DD \u05E0\u05E9\u05DE\u05E8\u05D5 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!';
+        successEl.style.display = 'block';
+        addSecurityLog('Settings updated');
+        setTimeout(function() { successEl.style.display = 'none'; }, 3000);
+    }
+    function changePassword() {
+        var currentPass = document.getElementById('current-pass').value;
+        var newPass = document.getElementById('new-pass').value;
+        var confirmPass = document.getElementById('confirm-pass').value;
+        var msgEl = document.getElementById('pass-change-msg');
+        if (!msgEl) { msgEl = document.createElement('div'); msgEl.id = 'pass-change-msg'; msgEl.style.cssText = 'margin-top:10px;text-align:center;font-size:13px;padding:8px;border-radius:6px;'; var btn = document.querySelector('[onclick="changePassword()"]'); if (btn) btn.parentNode.insertBefore(msgEl, btn.nextSibling); }
+        var storedHash = secureGet('admin_password');
+        sha256(currentPass).then(function(hash) {
+            if (hash !== storedHash) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05E0\u05D5\u05DB\u05D7\u05D9\u05EA \u05E9\u05D2\u05D5\u05D9\u05D4'; return; }
+            if (newPass.length < 8) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05D7\u05D9\u05D9\u05D1\u05EA \u05DC\u05E4\u05D7\u05D5\u05EA 8 \u05EA\u05D5\u05D5\u05D9\u05DD'; return; }
+            if (newPass !== confirmPass) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D0\u05D5\u05EA \u05D0\u05D9\u05E0\u05DF \u05EA\u05D5\u05D0\u05DE\u05D5\u05EA'; return; }
+            sha256(newPass).then(function(newHash) {
+                secureSet('admin_password', newHash);
+                msgEl.style.color = '#28a745';
+                msgEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05E9\u05D5\u05E0\u05EA\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!';
+                addSecurityLog('Password changed');
+                document.getElementById('current-pass').value = '';
+                document.getElementById('new-pass').value = '';
+                document.getElementById('confirm-pass').value = '';
+                setTimeout(function() { msgEl.textContent = ''; }, 3000);
+            });
+        });
+    }
+    function resetPassword() {
+        var masterCode = document.getElementById('master-code-reset').value;
+        var newPass = document.getElementById('new-password').value;
+        var confirmPass = document.getElementById('confirm-password').value;
+        var errorEl = document.getElementById('reset-error');
+        var successEl = document.getElementById('reset-success');
+        errorEl.style.display = 'none'; successEl.style.display = 'none';
+        var storedCode = localStorage.getItem(SECURITY.STORAGE_PREFIX + 'master_code') || SECURITY.MASTER_CODE;
+        if (masterCode !== storedCode) { errorEl.textContent = '\u05E7\u05D5\u05D3 \u05D0\u05D1\u05D8\u05D7\u05D4 \u05E9\u05D2\u05D5\u05D9'; errorEl.style.display = 'block'; if (typeof _currentFP !== 'undefined' && _currentFP) recordFailedAttempt(_currentFP); return; }
+        if (newPass.length < 8) { errorEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05D7\u05D9\u05D9\u05D1\u05EA 8 \u05EA\u05D5\u05D5\u05D9\u05DD \u05DC\u05E4\u05D7\u05D5\u05EA'; errorEl.style.display = 'block'; return; }
+        if (newPass !== confirmPass) { errorEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D0\u05D5\u05EA \u05D0\u05D9\u05E0\u05DF \u05EA\u05D5\u05D0\u05DE\u05D5\u05EA'; errorEl.style.display = 'block'; return; }
+        sha256(newPass).then(function(hash) {
+            secureSet('admin_password', hash);
+            successEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D0\u05D5\u05E4\u05E1\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!';
+            successEl.style.display = 'block';
+            addSecurityLog('Password reset via security code');
+            document.getElementById('master-code-reset').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+            setTimeout(function() { showSection('login-section'); }, 2000);
+        });
+    }
+\n</script>
 </body>
 </html>
