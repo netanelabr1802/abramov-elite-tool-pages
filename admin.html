@@ -40,7 +40,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 32px 16px;
             min-height: 100vh;
         }
@@ -219,6 +219,9 @@
         }
         #login-section.active, #admin-panel.active, #lockout-section.active, #reset-section.active, #unblock-section.active {
             display: block;
+        }
+        #login-section.active, #lockout-section.active, #reset-section.active, #unblock-section.active {
+            margin: auto 0;
         }
         .admin-header {
             display: flex;
