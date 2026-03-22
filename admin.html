@@ -214,10 +214,10 @@
         .log-entry.suspicious .time {
             color: var(--danger);
         }
-        #login-section, #admin-panel, #lockout-section {
+        #login-section, #admin-panel, #lockout-section, #reset-section, #unblock-section {
             display: none;
         }
-        #login-section.active, #admin-panel.active, #lockout-section.active {
+        #login-section.active, #admin-panel.active, #lockout-section.active, #reset-section.active, #unblock-section.active {
             display: block;
         }
         .admin-header {
@@ -313,7 +313,8 @@
             .btn { font-size: 14px; padding: 12px 20px; }
             input { font-size: 14px; padding: 12px 14px; }
         }
-    </style>
+    .link-btn{background:none;border:none;color:var(--accent);font-size:13px;cursor:pointer;text-decoration:underline;padding:4px 0;transition:opacity .3s}.link-btn:hover{opacity:.7}.link-buttons{display:flex;justify-content:center;gap:20px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+</style>
 </head>
 <body>
     <script src="site-config.js"></script>
@@ -358,9 +359,15 @@
             <button class="btn" id="login-btn" onclick="attemptLogin()">&#x1F510; כניסה מאובטחת</button>
 
             <div class="attempt-counter" id="attempt-counter"></div>
+<div class="link-buttons"><button class="link-btn" onclick="showSection('reset-section')">&#x1F511; שכחתי סיסמה</button><button class="link-btn" onclick="showSection('unblock-section')">&#x1F513; החשבון שלי נחסם</button></div>
         </div>
 
-        <!-- ADMIN PANEL -->
+        
+<!-- RESET SECTION -->
+<div id="reset-section"><h1>&#x1F511; איפוס סיסמה</h1><p class="subtitle">הזן את קוד האב לאיפוס סיסמת הניהול.</p><div class="alert alert-danger" id="reset-error"></div><div class="alert alert-success" id="reset-success"></div><div class="form-group"><label for="master-code-reset">קוד אב</label><input type="password" id="master-code-reset" placeholder="הזן קוד אב..." autocomplete="off"></div><div class="form-group"><label for="new-password">סיסמה חדשה</label><input type="password" id="new-password" placeholder="הזן סיסמה חדשה..." autocomplete="off"></div><div class="form-group"><label for="confirm-password">אימות סיסמה</label><input type="password" id="confirm-password" placeholder="הזן שוב..." autocomplete="off"></div><button class="btn" onclick="resetPassword()">&#x1F504; איפוס סיסמה</button><div class="link-buttons"><button class="link-btn" onclick="showSection('login-section')">&#x2190; חזרה להתחברות</button></div></div>
+<!-- UNBLOCK SECTION -->
+<div id="unblock-section"><h1>&#x1F513; ביטול חסימה</h1><p class="subtitle">הזן את קוד האב לביטול חסימת החשבון.</p><div class="alert alert-danger" id="unblock-error"></div><div class="alert alert-success" id="unblock-success"></div><div class="form-group"><label for="master-code-unblock">קוד אב</label><input type="password" id="master-code-unblock" placeholder="הזן קוד אב..." autocomplete="off"></div><button class="btn btn-success" onclick="unblockAccount()">&#x1F513; ביטול חסימה</button><div class="link-buttons"><button class="link-btn" onclick="showSection('login-section')">&#x2190; חזרה להתחברות</button></div></div>
+<!-- ADMIN PANEL -->
         <div id="admin-panel">
             <div class="admin-header">
                 <h2>&#x2699;&#xFE0F; פאנל ניהול</h2>
@@ -426,7 +433,8 @@
             LOCKOUT_DURATION: 5 * 60 * 1000,   // 5 minutes
             SESSION_TIMEOUT: 30 * 60 * 1000,     // 30 minutes
             MIN_PASSWORD_LENGTH: 8,
-            STORAGE_PREFIX: 'aet_admin_'
+            STORAGE_PREFIX: 'aet_admin_',
+            MASTER_CODE: 'EliteMaster2026!'
         };
 
         // Default password hash (SHA-256 of "NetanelAdmin2026!")
@@ -982,6 +990,56 @@
         // Start
         init();
     })();
-    </script>
+    
+    // === SECTION NAVIGATION ===
+    window.showSection = function(id) {
+        ['login-section','admin-panel','lockout-section','reset-section','unblock-section'].forEach(function(s){
+            var el = document.getElementById(s);
+            if(el) el.classList.remove('active');
+        });
+        var target = document.getElementById(id);
+        if(target) target.classList.add('active');
+    };
+    
+    // === PASSWORD RESET ===
+    window.resetPassword = async function() {
+        var mc = document.getElementById('master-code-reset').value;
+        var np = document.getElementById('new-password').value;
+        var cp = document.getElementById('confirm-password').value;
+        var errEl = document.getElementById('reset-error');
+        var sucEl = document.getElementById('reset-success');
+        errEl.style.display = 'none';
+        sucEl.style.display = 'none';
+        if(!mc||!np||!cp){errEl.innerHTML='&#x26A0; יש למלא את כל השדות.';errEl.style.display='block';return;}
+        if(mc !== SECURITY.MASTER_CODE){errEl.innerHTML='&#x274C; קוד אב שגוי.';errEl.style.display='block';return;}
+        if(np.length < 8){errEl.innerHTML='&#x26A0; הסיסמה חייבת להכיל לפחות 8 תווים.';errEl.style.display='block';return;}
+        if(np !== cp){errEl.innerHTML='&#x26A0; הסיסמאות אינן תואמות.';errEl.style.display='block';return;}
+        var enc = new TextEncoder();
+        var hash = await crypto.subtle.digest('SHA-256', enc.encode(np));
+        var hex = Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+        localStorage.setItem(SECURITY.STORAGE_PREFIX + 'pw_hash', hex);
+        document.getElementById('master-code-reset').value='';
+        document.getElementById('new-password').value='';
+        document.getElementById('confirm-password').value='';
+        sucEl.innerHTML='&#x2705; הסיסמה אופסה בהצלחה!';sucEl.style.display='block';
+        setTimeout(function(){showSection('login-section');},3000);
+    };
+    
+    // === ACCOUNT UNBLOCK ===
+    window.unblockAccount = function() {
+        var mc = document.getElementById('master-code-unblock').value;
+        var errEl = document.getElementById('unblock-error');
+        var sucEl = document.getElementById('unblock-success');
+        errEl.style.display = 'none';
+        sucEl.style.display = 'none';
+        if(!mc){errEl.innerHTML='&#x26A0; יש להזין קוד אב.';errEl.style.display='block';return;}
+        if(mc !== SECURITY.MASTER_CODE){errEl.innerHTML='&#x274C; קוד אב שגוי.';errEl.style.display='block';return;}
+        localStorage.setItem(SECURITY.STORAGE_PREFIX + 'attempts', '0');
+        localStorage.removeItem(SECURITY.STORAGE_PREFIX + 'lockout');
+        document.getElementById('master-code-unblock').value='';
+        sucEl.innerHTML='&#x2705; החשבון שוחרר בהצלחה!';sucEl.style.display='block';
+        setTimeout(function(){showSection('login-section');},3000);
+    };
+</script>
 </body>
 </html>
