@@ -208,6 +208,28 @@
             footer { margin-top: 24px; padding-top: 16px; font-size: 12px; }
         }
     </style>
+
+    <style>
+    .copy-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, #c8a84e, #f0d27a);
+        color: #1a1a2e;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        direction: rtl;
+    }
+    .copy-btn:hover {
+        background: linear-gradient(135deg, #f0d27a, #c8a84e);
+        transform: scale(1.05);
+    }
+    .copy-icon { margin-left: 5px; }
+    </style>
 </head>
 <body>
     <script src="site-config.js"></script>
@@ -236,6 +258,9 @@
             <div class="contact-item">
                 <span class="contact-label"><span class="icon">&#x1F4E7;</span>דוא"ל</span>
                 <div class="contact-value email" dir="ltr" id="contact-email">Netanelabr1802@gmail.com</div>
+                <button onclick="copyEmail()" class="copy-btn" title="העתק דוא&#39;ל">
+                    <span class="copy-icon">📋</span> העתק
+                </button>
             </div>
         </div>
 
@@ -275,6 +300,22 @@
                 if (nameEl) nameEl.textContent = SITE_CONFIG.developerName;
             }
         })();
+    </script>
+
+    <script>
+    function copyEmail() {
+        var email = document.getElementById("contact-email").textContent.trim();
+        navigator.clipboard.writeText(email).then(function() {
+            var btn = document.querySelector(".copy-btn");
+            var orig = btn.innerHTML;
+            btn.innerHTML = "<span class=\"copy-icon\">\u2705</span> \u05D4\u05D5\u05E2\u05EA\u05E7!";
+            btn.style.background = "#28a745";
+            setTimeout(function() {
+                btn.innerHTML = orig;
+                btn.style.background = "";
+            }, 2000);
+        });
+    }
     </script>
 </body>
 </html>
