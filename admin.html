@@ -1126,7 +1126,20 @@
 
         // Start
         init();
-    })();
+    
+
+        // Expose IIFE-scoped utilities for outer functions
+        window.SECURITY = SECURITY;
+        window.secureSet = secureSet;
+        window.secureGet = secureGet;
+        window.sha256 = sha256;
+        window.addSecurityLog = addSecurityLog;
+        window.persistGet = persistGet;
+        window.persistSet = persistSet;
+        window.showAlert = showAlert;
+        window.DEFAULT_HASH = DEFAULT_HASH;
+
+        })();
     
     // === SECTION NAVIGATION ===
     window.showSection = function(id) {
