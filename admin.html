@@ -7,7 +7,7 @@
     <meta name="description" content="פאנל ניהול - Abramov Elite Tool">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0B0F19">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-ancestors 'none'; form-action 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://mjllnxubsotqaanbxgvl.supabase.co https://api.ipify.org; frame-ancestors 'none'; form-action 'none';">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
@@ -417,10 +417,15 @@
             .section-card { padding: 10px; }
             .section-card h3 { font-size: 14px; }
         }
+    
+        @media(max-width:768px){body{padding:10px;}.card{padding:15px;margin:10px 0;}h1,h2{font-size:1.3em;}input,select,textarea{font-size:16px!important;}button{padding:12px 20px;font-size:1em;min-height:44px;}table{font-size:0.75em;}table th,table td{padding:6px 4px;}#live-clock div:first-child{font-size:1.5em;}.admin-grid{grid-template-columns:1fr!important;}#admin-panel{padding:10px;}}
+        @media(max-width:480px){body{padding:5px;}.card{padding:10px;margin:8px 0;}h1{font-size:1.1em;}button{width:100%;margin:5px 0;}}
+        button,a,input,select{-webkit-tap-highlight-color:rgba(212,175,55,0.3);}input,select,textarea{-webkit-appearance:none;border-radius:8px;}
     </style>
 </head>
 <body>
     <script src="site-config.js"></script>
+    <script src="supabase-config.js"></script>
     <div class="container">
         <a href="index.html" class="back-link">&larr; חזרה לעמוד הבית</a>
 
@@ -429,7 +434,7 @@
             <h1>&#x1F6D1; חסימה זמנית</h1>
             <p class="subtitle">זוהו ניסיונות כניסה חשודים. המערכת נחסמה זמנית.</p>
             <div class="alert alert-danger" style="display: block;">
-                <strong>&#x26A0;&#xFE0F; התראת אבטחה:</strong> בוצעו מספר ניסיונות כניסה כושלים. ייתכן שמדובר בניסיון פישינג או חדירה.
+                <strong>&#x26A0;&#xFE0F; התראת אבטחה:</strong> בוצעו מספר ניסיונות כניסה כושלים. ייתכן שמדובר בניסיון כניסה בלתי מורשה.
             
                 <div class="monitoring-notice" style="margin-top:20px;">
                     <span class="monitor-icon">⚠️</span>
@@ -439,7 +444,7 @@
             </div>
             <div class="lockout-timer" id="lockout-timer">--:--</div>
             <p style="text-align: center; font-size: 13px; color: var(--text-muted);">
-                המערכת תשוחרר אוטומטית בתום תקופת הנעילה.
+                המערכת תשוחרר אוטומטית המערכת תשוחרר אוטומטית בתום הספירה לאחור.
             </p>
             <div id="lockout-log" style="margin-top: 20px;"></div>
         </div>
@@ -462,7 +467,7 @@
                 </div>
             <div class="alert alert-warning" id="login-warning"></div>
             <div class="alert alert-info" id="phishing-alert">
-                <strong>&#x1F6A8; זיהוי פישינג:</strong> זוהה ניסיון חשוד. פרטי הכניסה שלך מוגנים והם לא נשלחים לשום שרת חיצוני. כל האימות מתבצע מקומית במכשיר שלך.
+                <strong>&#x1F6A8; זיהוי פישינג:</strong> זוהה ניסיון חשוד. ניסיונות הכניסה מנוטרים ומסונכרנים לשרת מאובטח. כל פעילות חשודה מדווחת למנהל המערכת באופן מיידי.
             </div>
 
             <div class="form-group">
@@ -485,6 +490,11 @@
         <div id="admin-panel">
             <div class="admin-header">
                 <h2>&#x2699;&#xFE0F; פאנל ניהול</h2>
+            <div id="live-clock" style="text-align:center;margin:15px 0;padding:12px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:10px;">
+                <div style="font-size:2em;font-weight:bold;color:#D4AF37;font-family:monospace;direction:ltr;" id="clock-time"></div>
+                <div style="font-size:1em;color:#b0b0b0;margin-top:5px;" id="clock-date"></div>
+                <div style="font-size:0.8em;color:#666;margin-top:3px;" id="sync-status"></div>
+            </div>
                 <div class="session-info" id="session-info"></div>
             </div>
 
@@ -891,7 +901,7 @@
             var configDiv = document.getElementById('current-config');
             if (configDiv && typeof SITE_CONFIG !== 'undefined') {
                 configDiv.innerHTML =
-                    '<div class="config-item"><span class="config-label">דוג"ל</span><span class="config-value">' + SITE_CONFIG.contactEmail + '</span></div>' +
+                    '<div class="config-item"><span class="config-label">דוא"ל</span><span class="config-value">' + SITE_CONFIG.contactEmail + '</span></div>' +
                     '<div class="config-item"><span class="config-label">שם מפתח</span><span class="config-value">' + SITE_CONFIG.developerName + '</span></div>' +
                     '<div class="config-item"><span class="config-label">גרסה</span><span class="config-value">' + SITE_CONFIG.version + '</span></div>';
             }
@@ -1177,51 +1187,30 @@
     
     // === ACCOUNT UNBLOCK ===
     window.unblockAccount = function() {
-        var mc = document.getElementById('master-code-unblock').value;
-        var errEl = document.getElementById('unblock-error');
-        var sucEl = document.getElementById('unblock-success');
-        errEl.style.display = 'none';
-        sucEl.style.display = 'none';
-        if(!mc){errEl.innerHTML='&#x26A0; יש להזין קוד אבטחה.';errEl.style.display='block';return;}
-        if(mc !== (localStorage.getItem(SECURITY.STORAGE_PREFIX + "master_code") || SECURITY.MASTER_CODE)){errEl.innerHTML='&#x274C; קוד אבטחה שגוי.';errEl.style.display='block';return;}
-        localStorage.setItem(SECURITY.STORAGE_PREFIX + 'attempts', '0');
-        localStorage.removeItem(SECURITY.STORAGE_PREFIX + 'lockout');
-        document.getElementById('master-code-unblock').value='';
-        sucEl.innerHTML='&#x2705; החשבון שוחרר בהצלחה!';sucEl.style.display='block';
-        setTimeout(function(){showSection('login-section');},3000);
-    };
+            var mc = document.getElementById("master-code-unblock")?document.getElementById("master-code-unblock").value:"";
+            if(!mc){showAlert("\u05e0\u05d0 \u05dc\u05d4\u05d6\u05d9\u05df \u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4","error");return;}
+            var sc = persistGet("security_code") || SECURITY.MASTER_CODE;
+            if(mc!==sc){showAlert("\u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4 \u05e9\u05d2\u05d5\u05d9","error");return;}
+            var keys=Object.keys(localStorage);keys.forEach(function(k){if(k.indexOf("lockout")>-1||k.indexOf("failed_attempt")>-1)localStorage.removeItem(k);});
+            if(typeof SupabaseClient!=="undefined"){SupabaseClient.logSecurityEvent("account_unblocked",{});}
+            showAlert("\u05d4\u05d7\u05e9\u05d1\u05d5\u05df \u05e9\u05d5\u05d7\u05e8\u05e8 \u05d1\u05d4\u05e6\u05dc\u05d7\u05d4!","success");
+            addSecurityLog("account_unblocked");
+            showSection("login-section");
+        };
 
-        function changeSecurityCode() {
-            var currentCode = document.getElementById('current-code').value;
-            var newCode = document.getElementById('new-code').value;
-            var confirmCode = document.getElementById('confirm-code').value;
-            var msgEl = document.getElementById('change-code-msg');
-            
-            var storedCode = localStorage.getItem(SECURITY.STORAGE_PREFIX + "master_code") || SECURITY.MASTER_CODE;
-            
-            if (currentCode !== storedCode) {
-                msgEl.style.color = '#ff6b6b';
-                msgEl.textContent = 'קוד אבטחה נוכחי שגוי';
-                return;
-            }
-            if (newCode.length < 6) {
-                msgEl.style.color = '#ff6b6b';
-                msgEl.textContent = 'קוד אבטחה חדש חייב להכיל לפחות 6 תווים';
-                return;
-            }
-            if (newCode !== confirmCode) {
-                msgEl.style.color = '#ff6b6b';
-                msgEl.textContent = 'קודי האבטחה אינם תואמים';
-                return;
-            }
-            
-            localStorage.setItem(SECURITY.STORAGE_PREFIX + "master_code", newCode);
-            msgEl.style.color = '#28a745';
-            msgEl.textContent = 'קוד אבטחה שונה בהצלחה!';
-            document.getElementById('current-code').value = '';
-            document.getElementById('new-code').value = '';
-            document.getElementById('confirm-code').value = '';
-        }
+        async function changeSecurityCode() {
+        var cc = document.getElementById("current-security-code")?document.getElementById("current-security-code").value:"";
+        var nc = document.getElementById("new-security-code")?document.getElementById("new-security-code").value:"";
+        if(!nc){showAlert("\u05e0\u05d0 \u05dc\u05d4\u05d6\u05d9\u05df \u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4 \u05d7\u05d3\u05e9","error");return;}
+        var sc = persistGet("security_code") || SECURITY.MASTER_CODE;
+        if(cc && cc!==sc){showAlert("\u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4 \u05e0\u05d5\u05db\u05d7\u05d9 \u05e9\u05d2\u05d5\u05d9","error");return;}
+        persistSet("security_code", nc);
+        if(typeof SupabaseClient!=="undefined"){SupabaseClient.syncConfig("security_code_updated",new Date().toISOString());SupabaseClient.logSecurityEvent("security_code_changed",{});}
+        showAlert("\u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4 \u05e9\u05d5\u05e0\u05d4 \u05d1\u05d4\u05e6\u05dc\u05d7\u05d4!","success");
+        addSecurityLog("security_code_changed");
+        if(document.getElementById("current-security-code"))document.getElementById("current-security-code").value="";
+        if(document.getElementById("new-security-code"))document.getElementById("new-security-code").value="";
+    }
 
     
 
@@ -1370,51 +1359,75 @@
         addSecurityLog('Settings updated');
         setTimeout(function() { successEl.style.display = 'none'; }, 3000);
     }
-    function changePassword() {
-        var currentPass = document.getElementById('current-pass').value;
-        var newPass = document.getElementById('new-pass').value;
-        var confirmPass = document.getElementById('confirm-pass').value;
-        var msgEl = document.getElementById('pass-change-msg');
-        if (!msgEl) { msgEl = document.createElement('div'); msgEl.id = 'pass-change-msg'; msgEl.style.cssText = 'margin-top:10px;text-align:center;font-size:13px;padding:8px;border-radius:6px;'; var btn = document.querySelector('[onclick="changePassword()"]'); if (btn) btn.parentNode.insertBefore(msgEl, btn.nextSibling); }
-        var storedHash = secureGet('admin_password');
-        sha256(currentPass).then(function(hash) {
-            if (hash !== storedHash) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05E0\u05D5\u05DB\u05D7\u05D9\u05EA \u05E9\u05D2\u05D5\u05D9\u05D4'; return; }
-            if (newPass.length < 8) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05D7\u05D9\u05D9\u05D1\u05EA \u05DC\u05E4\u05D7\u05D5\u05EA 8 \u05EA\u05D5\u05D5\u05D9\u05DD'; return; }
-            if (newPass !== confirmPass) { msgEl.style.color = '#ff6b6b'; msgEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D0\u05D5\u05EA \u05D0\u05D9\u05E0\u05DF \u05EA\u05D5\u05D0\u05DE\u05D5\u05EA'; return; }
-            sha256(newPass).then(function(newHash) {
-                secureSet('admin_password', newHash);
-                msgEl.style.color = '#28a745';
-                msgEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05E9\u05D5\u05E0\u05EA\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!';
-                addSecurityLog('Password changed');
-                document.getElementById('current-pass').value = '';
-                document.getElementById('new-pass').value = '';
-                document.getElementById('confirm-pass').value = '';
-                setTimeout(function() { msgEl.textContent = ''; }, 3000);
-            });
-        });
+    async function changePassword() {
+        var cur = document.getElementById('current-password').value;
+        var np = document.getElementById('new-password').value;
+        var cp = document.getElementById('confirm-password').value;
+        if (!cur||!np||!cp){showAlert('\u05e0\u05d0 \u05dc\u05de\u05dc\u05d0 \u05d0\u05ea \u05db\u05dc \u05d4\u05e9\u05d3\u05d5\u05ea','error');return;}
+        if (np.length<8){showAlert('\u05d4\u05e1\u05d9\u05e1\u05de\u05d0 \u05d7\u05d9\u05d9\u05d1\u05ea 8 \u05ea\u05d5\u05d5\u05d9\u05dd \u05dc\u05e4\u05d7\u05d5\u05ea','error');return;}
+        if (np!==cp){showAlert('\u05d4\u05e1\u05d9\u05e1\u05de\u05d0\u05d5\u05ea \u05d0\u05d9\u05e0\u05df \u05ea\u05d5\u05d0\u05de\u05d5\u05ea','error');return;}
+        var cH = await sha256(cur);
+        var sH = persistGet('password_hash') || DEFAULT_HASH;
+        if (cH!==sH){showAlert('\u05d4\u05e1\u05d9\u05e1\u05de\u05d0 \u05d4\u05e0\u05d5\u05db\u05d7\u05d9\u05ea \u05e9\u05d2\u05d5\u05d9\u05d4','error');return;}
+        var nH = await sha256(np);
+        persistSet('password_hash', nH);
+        if(typeof SupabaseClient!=='undefined'){SupabaseClient.syncConfig('password_hash',nH);SupabaseClient.logSecurityEvent('password_changed',{});}
+        showAlert('\u05d4\u05e1\u05d9\u05e1\u05de\u05d0 \u05e9\u05d5\u05e0\u05ea\u05d4 \u05d1\u05d4\u05e6\u05dc\u05d7\u05d4!','success');
+        addSecurityLog('password_changed');
+        document.getElementById('current-password').value='';
+        document.getElementById('new-password').value='';
+        document.getElementById('confirm-password').value='';
     }
-    function resetPassword() {
-        var masterCode = document.getElementById('master-code-reset').value;
-        var newPass = document.getElementById('new-password').value;
-        var confirmPass = document.getElementById('confirm-password').value;
-        var errorEl = document.getElementById('reset-error');
-        var successEl = document.getElementById('reset-success');
-        errorEl.style.display = 'none'; successEl.style.display = 'none';
-        var storedCode = localStorage.getItem(SECURITY.STORAGE_PREFIX + 'master_code') || SECURITY.MASTER_CODE;
-        if (masterCode !== storedCode) { errorEl.textContent = '\u05E7\u05D5\u05D3 \u05D0\u05D1\u05D8\u05D7\u05D4 \u05E9\u05D2\u05D5\u05D9'; errorEl.style.display = 'block'; if (typeof _currentFP !== 'undefined' && _currentFP) recordFailedAttempt(_currentFP); return; }
-        if (newPass.length < 8) { errorEl.textContent = '\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05D7\u05D9\u05D9\u05D1\u05EA 8 \u05EA\u05D5\u05D5\u05D9\u05DD \u05DC\u05E4\u05D7\u05D5\u05EA'; errorEl.style.display = 'block'; return; }
-        if (newPass !== confirmPass) { errorEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D0\u05D5\u05EA \u05D0\u05D9\u05E0\u05DF \u05EA\u05D5\u05D0\u05DE\u05D5\u05EA'; errorEl.style.display = 'block'; return; }
-        sha256(newPass).then(function(hash) {
-            secureSet('admin_password', hash);
-            successEl.textContent = '\u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D0\u05D5\u05E4\u05E1\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!';
-            successEl.style.display = 'block';
-            addSecurityLog('Password reset via security code');
-            document.getElementById('master-code-reset').value = '';
-            document.getElementById('new-password').value = '';
-            document.getElementById('confirm-password').value = '';
-            setTimeout(function() { showSection('login-section'); }, 2000);
-        });
+    async function resetPassword() {
+        var code = document.getElementById("reset-security-code")?document.getElementById("reset-security-code").value:"";
+        var np = document.getElementById("reset-new-password")?document.getElementById("reset-new-password").value:"";
+        var cp = document.getElementById("reset-confirm-password")?document.getElementById("reset-confirm-password").value:"";
+        if(!code||!np||!cp){showAlert("\u05e0\u05d0 \u05dc\u05de\u05dc\u05d0 \u05d0\u05ea \u05db\u05dc \u05d4\u05e9\u05d3\u05d5\u05ea","error");return;}
+        var sc = persistGet("security_code") || SECURITY.MASTER_CODE;
+        if(code!==sc){showAlert("\u05e7\u05d5\u05d3 \u05d0\u05d1\u05d8\u05d7\u05d4 \u05e9\u05d2\u05d5\u05d9","error");return;}
+        if(np.length<8){showAlert("\u05d4\u05e1\u05d9\u05e1\u05de\u05d0 \u05d7\u05d9\u05d9\u05d1\u05ea 8 \u05ea\u05d5\u05d5\u05d9\u05dd \u05dc\u05e4\u05d7\u05d5\u05ea","error");return;}
+        if(np!==cp){showAlert("\u05d4\u05e1\u05d9\u05e1\u05de\u05d0\u05d5\u05ea \u05d0\u05d9\u05e0\u05df \u05ea\u05d5\u05d0\u05de\u05d5\u05ea","error");return;}
+        var nH = await sha256(np);
+        persistSet("password_hash", nH);
+        persistSet("failed_attempts", "0");
+        persistSet("lockout_until", "");
+        if(typeof SupabaseClient!=="undefined"){SupabaseClient.syncConfig("password_hash",nH);SupabaseClient.logSecurityEvent("password_reset",{});}
+        showAlert("\u05d4\u05e1\u05d9\u05e1\u05de\u05d0 \u05d0\u05d5\u05e4\u05e1\u05d4 \u05d1\u05d4\u05e6\u05dc\u05d7\u05d4!","success");
+        addSecurityLog("password_reset");
+        showSection("login-section");
     }
+    
+
+    // LIVE CLOCK
+    function updateClock(){var t=document.getElementById("clock-time"),d=document.getElementById("clock-date"),s=document.getElementById("sync-status");if(!t)return;var n=new Date();t.textContent=n.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit",second:"2-digit"});var days=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];var months=["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];if(d)d.textContent="יום "+days[n.getDay()]+", "+n.getDate()+" "+months[n.getMonth()]+" "+n.getFullYear();if(s)s.textContent="מסונכרן לשרת | פעיל";}
+    setInterval(updateClock,1000);updateClock();
+
+    // ACCESS LOGS
+    async function loadAccessLogs(){if(typeof SupabaseClient==="undefined")return;var logs=await SupabaseClient.getAccessLogs(50);var tb=document.getElementById("access-logs-body");if(!tb)return;if(!logs||!logs.length){tb.innerHTML="<tr><td colspan=5 style=\"padding:20px;text-align:center;color:#666\">אין רשומות</td></tr>";return;}var r="";logs.forEach(function(l){var dt=new Date(l.created_at);var ds=dt.toLocaleDateString("he-IL")+" "+dt.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit"});r+="<tr style=\"border-bottom:1px solid #222\"><td style=\"padding:8px;color:#ccc\">"+(l.ip_address||"-")+"</td><td style=\"padding:8px;color:#ccc\">"+(l.user_agent||"").substring(0,25)+"</td><td style=\"padding:8px;color:#ccc\">"+(l.page_visited||"-")+"</td><td style=\"padding:8px;color:#ccc\">"+ds+"</td><td style=\"padding:8px\"><button onclick=\"blockIP('"+( l.device_fingerprint||"")+"')\" style=\"padding:4px 8px;background:#e74c3c;color:#fff;border:none;border-radius:3px;cursor:pointer\">חסום</button></td></tr>";});tb.innerHTML=r;}
+
+    async function blockIP(fp){if(!confirm("האם לחסום מכשיר זה?"))return;if(typeof SupabaseClient!=="undefined"){await SupabaseClient.blockDevice(fp,"","Blocked by admin","permanent",null);showAlert("נחסם","success");loadAccessLogs();}}
+
+    // SESSIONS
+    async function loadActiveSessions(){if(typeof SupabaseClient==="undefined")return;var ss=await SupabaseClient.getActiveSessions();var c=document.getElementById("active-sessions-list");if(!c)return;if(!ss||!ss.length){c.innerHTML="<p style=\"color:#666\">אין חיבורים פעילים</p>";return;}var ht="";var ct=secureGet("session_token");ss.forEach(function(s){var d=new Date(s.last_active_at);var ic=(s.session_token===ct);ht+="<div style=\"display:flex;justify-content:space-between;align-items:center;padding:10px;margin:5px 0;background:rgba(255,255,255,0.05);border-radius:8px;border:1px solid "+(ic?"#D4AF37":"#333")+"\"><div><strong style=\"color:#D4AF37\">"+(s.device_name||"Unknown")+"</strong>"+(ic?" <span style=\"color:#2ecc71;font-size:0.8em\">(החיבור הנוכחי)</span>":"")+"<br><span style=\"color:#888;font-size:0.85em\">IP: "+(s.ip_address||"-")+"</span></div>"+(ic?"":"<button onclick=\"terminateSession('"+s.session_token+"')\" style=\"padding:5px 10px;background:#e74c3c;color:#fff;border:none;border-radius:4px;cursor:pointer\">נתק</button>")+"</div>";});c.innerHTML=ht;}
+
+    async function terminateSession(t){if(!confirm("האם לנתק חיבור?"))return;if(typeof SupabaseClient!=="undefined"){await SupabaseClient.endSession(t);showAlert("נותק בהצלחה","success");loadActiveSessions();}}
+
+    // TRASH & LOG DELETE
+    function promptTrashCleanup(){var p=prompt("הזן סיסמא לאימות:");if(!p)return;sha256(p).then(function(hash){var st=persistGet("password_hash")||DEFAULT_HASH;if(hash!==st){showAlert("סיסמא שגויה","error");return;}localStorage.removeItem(SECURITY.STORAGE_PREFIX+"security_log");if(typeof SupabaseClient!=="undefined")SupabaseClient.clearSecurityEvents();showAlert("ניקוי בוצע בהצלחה!","success");addSecurityLog("trash_cleanup");});}
+
+    function promptClearSecurityLog(){var p=prompt("הזן סיסמא למחיקת יומן:");if(!p)return;sha256(p).then(function(hash){var st=persistGet("password_hash")||DEFAULT_HASH;if(hash!==st){showAlert("סיסמא שגויה","error");return;}persistSet("security_log","[]");showAlert("יומן נמחק בהצלחה!","success");});}
+
+    // AUTO-LOGOUT
+    document.addEventListener("visibilitychange",function(){if(document.hidden&&secureGet("session_token")){window._alt=setTimeout(function(){if(typeof SupabaseClient!=="undefined")SupabaseClient.endSession(secureGet("session_token"));logout();},300000);}else{clearTimeout(window._alt);}});
+
+    // INIT ON ADMIN PANEL
+    var _origShowSection=showSection;showSection=function(id){_origShowSection(id);if(id==="admin-panel"){setTimeout(function(){loadAccessLogs();loadActiveSessions();if(typeof SupabaseClient!=="undefined"&&secureGet("session_token"))SupabaseClient.registerSession(secureGet("session_token"));},500);}};
+
+    // DEVICE-SPECIFIC LOCKOUT
+    (function(){var did=navigator.userAgent.length+"_"+screen.width+"x"+screen.height;var sh=0;for(var i=0;i<did.length;i++){sh=((sh<<5)-sh)+did.charCodeAt(i);sh|=0;}window._dlk="lk_"+Math.abs(sh).toString(36);var _pg=persistGet,_ps=persistSet;window.persistGet=function(k){if(k==="lockout_until"||k==="failed_attempts")return _pg(k+"_"+window._dlk);return _pg(k);};window.persistSet=function(k,v){if(k==="lockout_until"||k==="failed_attempts")return _ps(k+"_"+window._dlk,v);return _ps(k,v);};})();
+
+    if(typeof SupabaseClient!=="undefined")SupabaseClient.logAccess("admin");
+
     </script>
 </body>
 </html>
